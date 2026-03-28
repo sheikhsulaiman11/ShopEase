@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Cart — ShopEase</title>
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+
+  <nav>
+    <a class="nav-logo" href="/">ShopEase</a>
+    <div style="display:flex; align-items:center; gap:20px;">
+      <span style="color: var(--nav-text); font-size:13px;">Hi, <%= user.firstname %>!</span>
+      <a class="nav-link" href="/products">Browse</a>
+      <a class="nav-link" href="/logout">Sign out</a>
+    </div>
+  </nav>
+
+  <div class="cart-page">
+    <div class="cart-title">Your Cart</div>
+    <div class="cart-sub">
+      <% if (cart && cart.items.length > 0) { %>
+        <%= cart.items.length %> item<%= cart.items.length !== 1 ? 's' : '' %> in your cart
+      <% } else { %>
+        Your cart is empty
+      <% } %>
+    </div>
+
+    <% if (!cart || cart.items.length === 0) { %>
+      <div class="empty-state">
+        <h3>Nothing here yet</h3>
+        <p>Looks like you haven't added anything to your cart.</p>
+        <a href="/products" class="shop-now-btn">Browse products</a>
+      </div>
+    <% } else { %>
+      <%
+        let total = 0;
+        cart.items.forEach(item => { total += item.product.price * item.quantity; });
+      %>
+      <div class="cart-list">
+        <% cart.items.forEach(item => { %>
+          <div class="cart-item">
+            <% if (item.product.image) { %>
+              <img class="cart-item-img" src="<%= item.product.image %>" alt="<%= item.product.name %>" />
+            <% } else { %>
+              <div class="cart-item-img-placeholder">No image</div>
+            <% } %>
+            <div class="cart-item-info">
+              <div class="cart-item-name"><%= item.product.name %></div>
+              <div class="cart-item-price">$<%= item.product.price.toFixed(2) %> each</div>
+            </div>
+            <div class="cart-item-controls">
+              <form action="/cart/update" method="POST" class="qty-form">
+                <input type="hidden" name="productId" value="<%= item.product._id %>" />
+                <input type="number" name="quantity" value="<%= item.quantity %>" min="1" class="qty-input" />
+                <button type="submit" class="qty-btn">Update</button>
+              </form>
+              <form action="/cart/remove/<%= item.product._id %>" method="POST">
+                <button type="submit" class="remove-btn">Remove</button>
+              </form>
+            </div>
+          </div>
+        <% }) %>
+      </div>
+
+      <div class="cart-summary">
+        <div class="summary-title">Order Summary</div>
+        <% cart.items.forEach(item => { %>
+          <div class="summary-row">
+            <span><%= item.product.name %> × <%= item.quantity %></span>
+            <span>$<%= (item.product.price * item.quantity).toFixed(2) %></span>
+          </div>
+        <% }) %>
+        <div class="summary-total">
+          <span>Total</span>
+          <span>$<%= total.toFixed(2) %></span>
+        </div>
+        <button class="checkout-btn">Proceed to Checkout</button>
+        <a href="/products" class="continue-link">← Continue shopping</a>
+      </div>
+    <% } %>
+  </div>
+
+</body>
+</html>

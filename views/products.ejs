@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Shop — ShopEase</title>
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+
+  <nav>
+    <a class="nav-logo" href="/">ShopEase</a>
+    <div style="display:flex; align-items:center; gap:20px;">
+      <span style="color: var(--nav-text); font-size:13px;">Hi, <%= user.firstname %>!</span>
+      <a class="nav-link" href="/cart">🛒 Cart</a>
+      <a class="nav-link" href="/logout">Sign out</a>
+    </div>
+  </nav>
+
+  <div class="shop-page">
+    <div class="shop-header">
+      <div>
+        <div class="shop-title">Our Collection</div>
+        <div class="shop-sub"><%= products.length %> product<%= products.length !== 1 ? 's' : '' %> available</div>
+      </div>
+      <a href="/cart" class="cart-btn">🛒 View Cart</a>
+    </div>
+
+    <% if (products.length === 0) { %>
+      <div class="empty-state">
+        <h3>No products yet</h3>
+        <p>Check back soon — new items are on their way.</p>
+      </div>
+    <% } else { %>
+      <div class="product-grid">
+        <% products.forEach(product => { %>
+          <div class="product-card">
+            <% if (product.image) { %>
+              <img class="product-img" src="<%= product.image %>" alt="<%= product.name %>" />
+            <% } else { %>
+              <div class="product-img-placeholder">No image</div>
+            <% } %>
+            <div class="product-info">
+              <div class="product-name"><%= product.name %></div>
+              <div class="product-desc"><%= product.description %></div>
+              <div class="product-footer">
+                <div class="product-price">$<%= product.price.toFixed(2) %></div>
+                <form action="/cart/add" method="POST">
+                  <input type="hidden" name="productId" value="<%= product._id %>" />
+                  <input type="hidden" name="quantity" value="1" />
+                  <button type="submit" class="add-to-cart-btn">Add to cart</button>
+                </form>
+              </div>
+            </div>
+          </div>
+        <% }) %>
+      </div>
+    <% } %>
+  </div>
+
+</body>
+</html>

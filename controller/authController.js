@@ -3,14 +3,21 @@ import bcrypt from "bcryptjs";
 import { User } from "../model/userModel.js";
 
 
+
+// Render login page
 export const renderLogin = (req, res) => {
     res.render('login', { error: null });
 };
 
+
+// Render signup page
 export const renderSignup = (req, res) => {
     res.render('signup', { error: null });
 };
 
+
+
+// Signup user
 export const signup = async (req, res) => {
     try {
         const { firstname, lastname, email, password } = req.body;
@@ -40,6 +47,8 @@ export const signup = async (req, res) => {
     }
 };
 
+
+// Login user
 export const login = async (req, res) => {
     try {
         const { email, password } = req.body;
