@@ -13,9 +13,9 @@ export const renderSignup = (req, res) => {
 
 export const signup = async (req, res) => {
     try {
-        const { firstName, lastName, email, password } = req.body;
+        const { firstname, lastname, email, password } = req.body;
         
-        if (!firstName || !lastName || !email || !password) {
+        if (!firstname || !lastname || !email || !password) {
             return res.render('signup', { error: 'All fields are required' });
         }
         const existing = await User.findOne({ email });
@@ -23,13 +23,12 @@ export const signup = async (req, res) => {
             return res.render('signup', { error: 'Email already exists' });
         }
         const hashedPassword = await bcrypt.hash(password, 10);
-        const user = await User.create({ firstName, lastName, email, password: hashedPassword });
+        const user = await User.create({ firstname, lastname, email, password: hashedPassword });
         const token = jwt.sign({ id: user._id },
              process.env.JWT_SECRET,
              { expiresIn: '7d' });
         res.cookie('token', token, {
                     httpOnly: true,
-                    secure: true,        // only HTTPS
                     sameSite: "strict",  // CSRF protection
              });
 
@@ -57,10 +56,9 @@ export const login = async (req, res) => {
         if (!isMatch) {
             return res.render('login', { error: 'Invalid email or password' });
         }
-        const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: '7d' });
+        const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: '1d' });
           res.cookie('token', token, {
                     httpOnly: true,
-                    secure: true,        // only HTTPS
                     sameSite: "strict",  // CSRF protection
              });
         res.redirect('/');
