@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Sign Up — ShopEase</title>
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+
+  <nav>
+    <a class="nav-logo" href="/">ShopEase</a>
+    <a class="nav-link" href="/login">Already have an account? Sign in</a>
+  </nav>
+
+  <div class="page">
+    <div class="wrapper">
+
+      <div class="form-panel">
+        <div class="form-title">Create account</div>
+        <div class="form-sub">Join us — it only takes a minute.</div>
+
+        <% if (typeof error !== 'undefined' && error) { %>
+          <div class="error-msg"><%= error %></div>
+        <% } %>
+
+        <form action="/auth/signup" method="POST">
+          <div class="input-row">
+            <div class="input-group">
+              <label for="firstname">First name</label>
+              <input type="text" id="firstname" name="firstname" placeholder="John" required />
+            </div>
+            <div class="input-group">
+              <label for="lastname">Last name</label>
+              <input type="text" id="lastname" name="lastname" placeholder="Doe" required />
+            </div>
+          </div>
+          <div class="input-group">
+            <label for="email">Email address</label>
+            <input type="email" id="email" name="email" placeholder="you@example.com" required />
+          </div>
+          <div class="input-group">
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" placeholder="••••••••" required />
+            <div class="input-hint">Minimum 8 characters</div>
+          </div>
+          <div class="input-group">
+            <label for="confirmPassword">Confirm password</label>
+            <input type="password" id="confirmPassword" name="confirmPassword" placeholder="••••••••" required />
+          </div>
+          <button type="submit" class="submit-btn accent">Create my account</button>
+        </form>
+
+        <div class="divider">
+          <div class="divider-line"></div>
+          <span class="divider-text">or</span>
+          <div class="divider-line"></div>
+        </div>
+
+        <div class="form-footer">
+          Already have an account? <a href="/login">Sign in</a>
+        </div>
+      </div>
+
+      <div class="info-panel">
+        <h2>Start shopping in minutes</h2>
+        <p>Create your free account and get access to our full collection.</p>
+        <ol class="steps">
+          <li><span class="step-num">1</span> Fill in your details and create your account</li>
+          <li><span class="step-num">2</span> Browse our handpicked product collection</li>
+          <li><span class="step-num">3</span> Add items to your cart and checkout easily</li>
+        </ol>
+      </div>
+
+    </div>
+  </div>
+
+</body>
+</html>
