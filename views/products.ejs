@@ -41,12 +41,15 @@
               <div class="product-img-placeholder">No image</div>
             <% } %>
             <div class="product-info">
-              <div class="product-name"><%= product.name %></div>
+              <div class="product-name"><%= product.title %></div>
               <div class="product-desc"><%= product.description %></div>
               <div class="product-footer">
                 <div class="product-price">$<%= product.price.toFixed(2) %></div>
                 <form action="/cart/add" method="POST">
-                  <input type="hidden" name="productId" value="<%= product._id %>" />
+                  <input type="hidden" name="productId" value="<%= product.id %>" />
+                  <input type="hidden" name="title" value="<%= product.title %>" />      <!-- ✅ add this -->
+                  <input type="hidden" name="price" value="<%= product.price %>" />      <!-- ✅ add this -->
+                  <input type="hidden" name="image" value="<%= product.image %>" />  
                   <input type="hidden" name="quantity" value="1" />
                   <button type="submit" class="add-to-cart-btn">Add to cart</button>
                 </form>

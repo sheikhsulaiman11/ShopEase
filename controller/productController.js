@@ -1,24 +1,15 @@
-import { Product } from "../model/productModel.js";
+import { User } from "../model/userModel.js";
+
 
 // GET all products — renders home page
+
 export const getAllProducts = async (req, res) => {
-    try {
-        const products = await Product.find();
-        res.render("products", { products, user: req.user });
-    } catch (err) {
-        console.log(err);
-        res.status(500).send("Server error");
-    }
+  try {
+    const response = await fetch('https://fakestoreapi.com/products');
+    const products = await response.json();
+    res.render('products', { products, user: req.user });
+  } catch (error) {
+    res.status(500).send('Failed to fetch products');
+  }
 };
 
-// GET single product
-export const getProductById = async (req, res) => {
-    try {
-        const product = await Product.findById(req.params.id);
-        if (!product) return res.status(404).send("Product not found");
-        res.render("productDetail", { product, user: req.user });
-    } catch (err) {
-        console.log(err);
-        res.status(500).send("Server error");
-    }
-};
