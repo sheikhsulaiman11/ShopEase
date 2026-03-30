@@ -10,6 +10,8 @@ import cartRoutes from "./routes/cartRoutes.js";
 
 const app = express();
 
+app.set('trust proxy', 1);
+
 mongoose.connect(process.env.MONGO_URL)
   .then(() => console.log('mongoDB connected successfully'))
   .catch((err) => console.log(err));
