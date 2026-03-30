@@ -25,16 +25,6 @@ ShopEase is a full-stack e-commerce web application where users can browse produ
 
 ---
 
-## 📸 Screenshots
-
-
-![Screenshot 1](https://raw.githubusercontent.com/sheikhsulaiman1/ShopEase/main/Screenshot%20(43).png)
-![Screenshot 2](https://raw.githubusercontent.com/sheikhsulaiman1/ShopEase/main/Screenshot%20(44).png)
-![Screenshot 3](https://raw.githubusercontent.com/sheikhsulaiman1/ShopEase/main/Screenshot%20(45).png)
-![Screenshot 4](https://raw.githubusercontent.com/sheikhsulaiman1/ShopEase/main/Screenshot%20(46).png)
-![Screenshot 5](https://raw.githubusercontent.com/sheikhsulaiman1/ShopEase/main/Screenshot%20(47).png)
----
-
 ## ⚙️ Installation
 
 1. Clone the repository
