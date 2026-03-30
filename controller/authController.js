@@ -36,6 +36,7 @@ export const signup = async (req, res) => {
              { expiresIn: '7d' });
         res.cookie('token', token, {
                     httpOnly: true,
+                    secure: true, 
                     sameSite: "none",  // CSRF protection
              });
 
@@ -68,6 +69,7 @@ export const login = async (req, res) => {
         const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: '1d' });
           res.cookie('token', token, {
                     httpOnly: true,
+                    secure: true, 
                     sameSite: "none",  // CSRF protection
              });
         res.redirect('/');
