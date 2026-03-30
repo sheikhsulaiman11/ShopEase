@@ -4,6 +4,7 @@ import { User } from "../model/userModel.js";
 export const isAuth = async (req, res, next) => {
     try {
         const token = req.cookies.token;
+        console.log('Token received:', token);
         if (!token) return res.redirect('/login');
 
         const decoded = jwt.verify(token, process.env.JWT_SECRET);
