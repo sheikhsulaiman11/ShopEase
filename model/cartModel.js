@@ -9,7 +9,7 @@ const cartSchema = new mongoose.Schema({
   items: [
     {
       productId: {
-        type: Number,  //  fakestoreapi uses number IDs
+        type: Number,  
         required: true
       },
       title: String,   //  store product data directly

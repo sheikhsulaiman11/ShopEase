@@ -1,10 +1,8 @@
-import { User } from "../model/userModel.js";
-
-
 // GET all products — renders home page
+
 export const getAllProducts = async (req, res) => {
   try {
-    const response = await fetch('https://dummyjson.com/products?limit=20');
+    const response = await fetch('https://dummyjson.com/products?limit=50');
     const data = await response.json();
     const products = data.products.map(p => ({
       id: p.id,

@@ -31,13 +31,15 @@ export const signup = async (req, res) => {
         }
         const hashedPassword = await bcrypt.hash(password, 10);
         const user = await User.create({ firstname, lastname, email, password: hashedPassword });
+
         const token = jwt.sign({ id: user._id },
-             process.env.JWT_SECRET,
-             { expiresIn: '7d' });
+                                 process.env.JWT_SECRET,
+                               { expiresIn: '1d' });
+
         res.cookie('token', token, {
                     httpOnly: true,
                     secure: true, 
-                    sameSite: "none",  // CSRF protection
+                    sameSite: "none",  
              });
 
         res.redirect('/');
@@ -66,11 +68,13 @@ export const login = async (req, res) => {
         if (!isMatch) {
             return res.render('login', { error: 'Invalid email or password' });
         }
-        const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: '1d' });
+        const token = jwt.sign({ id: user._id },
+                                 process.env.JWT_SECRET,
+                               { expiresIn: '1d' });
           res.cookie('token', token, {
                     httpOnly: true,
                     secure: true, 
-                    sameSite: "none",  // CSRF protection
+                    sameSite: "none",  
              });
         res.redirect('/');
     } catch (err) {
