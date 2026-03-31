@@ -1,6 +1,6 @@
 # 🛍️ ShopEase
 
-ShopEase is a full-stack e-commerce web application where users can browse products, create an account, log in, and manage their shopping cart — all in a clean and simple interface.
+ShopEase is a back-end e-commerce web application where users can browse products, create an account, log in, and manage their shopping cart — all in a clean and simple interface.
 
 ---
 
