@@ -57,7 +57,7 @@ export const login = async (req, res) => {
         const { email, password } = req.body;
 
         if (!email || !password) {
-    return res.render('login', { error: 'All fields are required' });
+            return res.render('login', { error: 'All fields are required' });
         }
 
         const user = await User.findOne({ email });
@@ -69,7 +69,7 @@ export const login = async (req, res) => {
             return res.render('login', { error: 'Invalid email or password' });
         }
         const token = jwt.sign({ id: user._id },
-                                 process.env.JWT_SECRET,
+                                process.env.JWT_SECRET,
                                { expiresIn: '1d' });
           res.cookie('token', token, {
                     httpOnly: true,
